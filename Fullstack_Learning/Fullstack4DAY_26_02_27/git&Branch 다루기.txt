@@ -1,0 +1,143 @@
+
+===== git 다루기 =====
+
+저장할 파일 만들기
+파일 위치부분 클릭 - cmd
+명령프롬프트 오픈된다
+
+# 현재 폴더를 Git 저장소로 만들기
+git init
+
+# WD -> SA git에 add(임시 저장소)
+특정 파일 
+git add 파일명
+전체 파일
+git add *
+
+# SA -> LL(Local Repository) git에 commit (완전 저장+메시지 로그)
+로그메시지에 띄어쓰기가 없으면 "" 안써도 됨.
+git commit -m "로그메시지"
+예시: git commit -m "V0.0 aaa.txt added"
+
+
+# 파일들이 add에 들어갔는지 아닌지 확인
+git status
+
+#로그 확인 
+전체 로그 확인 
+>git log
+짤막하게 한줄 확인
+>git log --oneline
+삭제 포함 전체 확인
+>git reflog
+
+#복원(Hard) - 웬만하면 안쓰는 게 좋다.
+git reset --hard "Commit Hash"
+예시: git reset --hard 3052268
+
+*주의: add에만 넣어두고 hard로 파일생성 전 시점으로 돌렸다가 다시 되돌아가면  add에 있던 파일은 복원불가! 
+
+HEAD -> 현재 위치 포인터 (보통 브랜치 마지막 커밋)
+
+Staging Area -> add된 부분
+Working Directory -> 실제 폴더
+Git Directory -> commit된 부분
+
+--soft
+: 해당부분까지 HEAD를 이동. 변경 내용들은 commit->add로 남는다. 
+실제 폴더 안 내용 삭제 X
+
+--mixed (기본값) 즉 git rest "해시" 입력 시 실행
+: 해당부분까지 HEAD를 이동하고, Staging Area 초기화. Working Directory 유지.
+add 초기화, 실제 폴더 안 내용 삭제 X
+
+--hard
+: 모든 부분이 지정 상태로 초기화된다.
+HEAD, Staging Area, Working Directory, Git Directory 모두 지정부분까지 초기화
+실제 폴더 Working Directory도 삭제되니 주의! add에만 넣어둔 파일을 되살릴 수 없다.
+
+
+===== Branch 다루기 =====
+
+Branch: 같은 팀끼리 작업 프로젝트를 공유하고 같이 작업할 수 있도록 해줌.
+각자 독립적인 작업 영역(저장소) 안에서 소스코드 변경 가능
+브랜치는 독립적으로 어떤 작업을 진행하기 위한 개념
+각각의 브랜치는 다른 브랜치의 영향을 받지 않으므로 여러 작업 동시 진행 가능
+
+# Branch확인
+git branch
+
+# Branch 생성 (dev등 이름 자유)
+git branch dev
+
+# Branch 변경
+git switch dev
+or
+git checkout dev
+-----------------------------------------
+# Merge 병합하기
+
+A 브런치에 저장하고 B 브런치로 변경하면 A의 내용은 나오지 않는다. 
+따라서 A를 작업완료한 뒤 합치는 작업이 필요하다.
+
+Merge기본옵션
+Fast-Forward(Default: FF) : 커밋 생성 x (메시지가 작성 불가, 정확한 시점 지정 X. 비권장)
+non-Fast-Forward: 커밋 생성 o (많이 쓰는 것. 권장)
+--------------------
+# Fast-Forward
+
+dev에 새로운 작업을 완료하고 master로 옮기기
+
+*옮기는 시점에서 옮길 브런치에 switch를 함!
+
+git switch master
+git merge dev
+-----------------------
+# non-Fast-Forward
+
+dev에 새로운 작업을 완료하고 master로 옮기기
+
+git switch master
+git merge dev --no-ff  -m "로그 메시지"
+
+dev 브런치 위치를 master와 동기화
+git switch dev
+git merge master
+
+
+---- 만약 로그 메시지를 작성하지 않았을 경우
+git merge dev --no-ff 
+ㄴ 이렇게 메시지 미작성 시 메시지 적으라고 문서 열림
+저장-나가기
+:wq
+
+---------------------------------------------
+
+
+
+
+가지 Branch확인
+git log --graph
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

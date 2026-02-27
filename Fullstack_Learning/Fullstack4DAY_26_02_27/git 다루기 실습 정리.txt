@@ -1,0 +1,66 @@
+
+깃-깃허브 저장 연결
+
+git 다운로드
+
+명령 프롬프트 열기
+
+깃 버전 확인
+>git -v
+
+깃허브의 이메일과 닉네임 입력
+>git config --global user.email "your email"
+>git config --global user.name "your nickname"
+
+저장 확인
+>git config --list
+최하단에
+user.email=작성한 이메일
+user.name=작성한 이름
+있으면 정상 저장된 것
+
+~~
+
+저장할 파일 만들기
+파일 위치부분 클릭 - cmd
+명령프롬프트 오픈된다.
+
+진행: 차례대로 aaa.txt, ccc.txt, bbb.txt를 만들고 특정 시점 복원해본다.
+
+현재 폴더를 git 저장소로 만듦
+>git init
+파일 상태 확인.
+>git status
+
+로그 확인. 중간중간 확인해가며 진행.
+>git log
+>git log --oneline
+>git reflog
+
+문서에 파일 만든 뒤 git 에 add (임시 저장소) -> commit+로그메시지 (완전 저장)
+>git add aaa.txt 
+>git commit -m "V0.0 aaa.txt added"
+
+>git add bbb.txt 
+>git commit -m "V0.1 bbb.txt added"
+
+>git add *
+>git commit -m "V0.2 ccc.txt added"
+
+로그 확인으로 커밋 해시 확인
+git log --oneline
+
+특정 시점 복원 
+git reset --hard "Commit Hash"
+예시: git reset --hard 3052268
+
+
+
+
+
+
+
+
+
+
+
